@@ -31,7 +31,11 @@ RUN apt-get install -y python3.6
 # install indy sdk wrapper
 RUN python3.6 -m pip install python3-indy==1.6.7
 
+RUN useradd -ms /bin/bash indy
+USER indy
+WORKDIR /home/indy
+
+RUN cd ~ && git clone https://github.com/stachen/indy-agent-docker
 
 # just to keep a process alive. Remove later
-CMD /bin/bash -c "while true; do sleep 1000; done" &
-
+CMD /bin/bash -c "while true; do sleep 1000; done" 
